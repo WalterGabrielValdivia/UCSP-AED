@@ -1,0 +1,86 @@
+#include <iostream>
+using namespace std;
+
+template<class T>
+struct Node{
+  T A[5];
+  Node<T> *next;
+  Node(Node<T> *_next)
+  {
+    next = _next;
+  }
+};
+template<class T>
+class Cola{
+public:
+  T*Head=nullptr;
+  T*Tail=nullptr;
+  Node<T>*p=nullptr;
+  Node<T>*q=nullptr;
+  void push(T v){
+    if(!Head && !Tail)
+    {
+      p= new Node<T>(nullptr); q=p;
+      Head = p->A; Tail = Head;
+      *Tail = v;
+    }
+    else if(Tail==(p->A)+4){
+      p->next = new Node<T>(nullptr);
+      p = p->next;
+      Tail = p->A;
+      *Tail = v;
+    }
+    else{
+      Tail++;
+      *Tail = v;
+    }
+      
+  }
+  T pop(){
+    if(!Head) {return 0;}
+    T *Aux = Head; T tmp = *Aux;
+    if(Head==Tail){
+      Head=nullptr;
+      Tail=nullptr;
+    }
+    else if(Head == (q->A)+4) {
+      Head = q->next->A;
+      q = q->next;
+    }
+    else{
+      Head++;
+    }
+    return tmp;
+  }
+  void print(){
+    if(!Head) {cout<<"Cola vacia ";return;}
+    Node<T>*r = q;
+    T *Aux =Head;
+    while(r)
+    {
+      if(r!=p){
+        for(;Aux<=(r->A)+4;Aux++)
+        {
+          if(Aux==(r->A)+4) cout<<*Aux<<"->";
+          else{
+            cout<<*Aux<<",";
+          }
+        }
+      }
+      else{
+         for(;Aux<=Tail;Aux++)
+        {
+          if(Aux==Tail)cout<<*Aux<<"->";
+          else{
+            cout<<*Aux<<",";
+          }
+        }
+      }
+      r = r->next;
+      if(r) Aux=r->A;
+    }
+    cout<<"NULL"<<endl;
+  }
+};
+int main() {  
+}
