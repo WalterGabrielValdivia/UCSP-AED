@@ -23,7 +23,9 @@ bool insert(int x);
 bool remove(int x);
 Cnode** rep(Cnode**W);
 Cnode*root=nullptr;
-
+void inorder(Cnode *p);
+void posorder(Cnode *p);
+void preorder(Cnode *p);
 };
 bool CBinTree::find(int x, Cnode **&p){
   for(p=&root;*p && (*p)->v!=x;p =&((*p)->nodes[x>(*p)->v]))
@@ -57,5 +59,29 @@ bool CBinTree::remove(int x){
   T = nullptr;
   return 1;
 }
+void CBinTree::inorder(Cnode*p)
+{
+  if(!p) return;
+  inorder(p->nodes[0]);
+  cout<<p->v<<" ";
+  inorder(p->nodes[1]);
+}
+void CBinTree::posorder(Cnode*p)
+{
+  if(!p) return;
+  posorder(p->nodes[0]);
+  posorder(p->nodes[1]);
+  cout<<p->v<<" ";
+
+}
+void CBinTree::preorder(Cnode*p)
+{
+  if(!p) return;
+  cout<<p->v<<" ";
+  preorder(p->nodes[0]);
+  preorder(p->nodes[1]);
+
+}
 int main() {
+  CBinTree arbol;
 }
